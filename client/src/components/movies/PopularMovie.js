@@ -8,6 +8,7 @@ import { IMAGE_BASE_URL } from "./../../utils/config";
 
 //Components
 import Navbar from "./../layout/Navbar";
+import SearchBar from "./SearchBar";
 
 //Popular Image Style
 import "./PopularMovie.css";
@@ -24,15 +25,18 @@ const PopularMovie = ({
       style={popularStyle}
     >
       <Navbar color="faded" dark={true} light={false} />
+      <SearchBar />
 
       <Row md="8">
         <Col className="justify-content-center" md="8">
-          <h1 className="display-3">{original_title}</h1>
-          <p className="lead">{overview}</p>
-          <hr className="my-2" />
-          <p className="lead">
-            <Button color="primary">Learn More</Button>
-          </p>
+          <div className="layout">
+            <h1 className="display-3">{original_title}</h1>
+            <p className="lead">{overview}</p>
+            <hr className="my-2" />
+            <p className="lead">
+              <Button color="primary">Learn More</Button>
+            </p>
+          </div>
         </Col>
       </Row>
     </Jumbotron>

@@ -10,11 +10,17 @@ import {
 
 import { API_URL, API_KEY } from "./../utils/config";
 
-export const fetchMovies = (currentPage = "") => async (dispatch) => {
+export const fetchMovies = (searchTerm, currentPage = "") => async (dispatch) => {
   //api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
   const popularEndpoint = `${API_URL}/movie/popular?api_key=${API_KEY}&page=${
     currentPage + 1
   }`;
+
+  //https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
+  const searchEndpoint = `${API_URL}/search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${
+    currentPage + 1
+  }`;
+  const activeEndpoint = searchTerm ? searchEndpoint : popularEndpoint;
 
   const isLoadMore = Boolean(currentPage);
 
@@ -23,7 +29,7 @@ export const fetchMovies = (currentPage = "") => async (dispatch) => {
       ? dispatch({ type: LOAD_MORE })
       : dispatch({ type: FETCH_MOVIES });
 
-    const res = await axios.get(popularEndpoint);
+    const res = await axios.get(activeEndpoint);
 
     isLoadMore
       ? dispatch({

@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 //Components
 import PopularMovie from "./../movies/PopularMovie";
-import SearchBar from "./../movies/SearchBar";
 import MoviesGrid from "./../movies/MoviesGrid";
 import LoadMoreButton from "./../movies/LoadMoreButton";
 import Spinner from "./Spinner";
@@ -12,15 +11,27 @@ import Spinner from "./Spinner";
 // Redux Actions
 import { fetchMovies } from "./../../actions/movies";
 
-const Home = ({ fetchMovies, fetchMoviesPending }) => {
-  useEffect(() => {
-    fetchMovies();
-  }, [fetchMovies]);
+const Home = ({ fetchMovies, fetchMoviesPending, searchTerm }) => {
+  const timeOut = useRef(null);
 
+  // if there is not search case
+  useEffect(() => {
+    !searchTerm && fetchMovies();
+  }, [fetchMovies, searchTerm]);
+
+  // if there is search, search after 2s
+  useEffect(() => {
+    timeOut.current = setTimeout(() => {
+      searchTerm && fetchMovies(searchTerm);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeOut.current);
+    };
+  }, [fetchMovies, searchTerm]);
   return (
     <>
       <PopularMovie />
-      <SearchBar />
       <MoviesGrid />
       {fetchMoviesPending && <Spinner />}
       <LoadMoreButton />
@@ -31,10 +42,12 @@ const Home = ({ fetchMovies, fetchMoviesPending }) => {
 Home.propTypes = {
   fetchMovies: PropTypes.func.isRequired,
   fetchMoviesPending: PropTypes.bool.isRequired,
+  searchTerm: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   fetchMoviesPending: state.movies.fetchMoviesPending,
+  searchTerm: state.search.searchTerm,
 });
 
 export default connect(mapStateToProps, { fetchMovies })(Home);

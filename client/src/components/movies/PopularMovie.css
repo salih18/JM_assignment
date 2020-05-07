@@ -1,8 +1,11 @@
 .jumbotron-cover-image {
-  
   color: white;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 80vh;
+}
+
+.layout {
+  background-color: rgba(0, 0, 0, 0.151);
 }

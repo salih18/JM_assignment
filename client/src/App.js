@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Components
+import Home from "./components/layout/Home";
 import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
 import NotFound from "./components/layout/NotFound";
-import Todo from "./components/todo/Todo";
+import Movie from "./components/movie/Movie";
 
 //Redux
 import { Provider } from "react-redux";
@@ -19,8 +19,8 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/todo/:id" component={Todo} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/movies/:id" component={Movie} />
           <Route component={NotFound} />
         </Switch>
       </Router>

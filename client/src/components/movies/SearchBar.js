@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Landing = () => {
+const SearchBar = () => {
     return (
         <div>
-            Landing Page
+            Search Bar
         </div>
     )
 }
 
-export default Landing
+export default SearchBar

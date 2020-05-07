@@ -6,9 +6,9 @@ import { Container, Button } from "reactstrap";
 // Redux Actions
 import { fetchMovies } from "./../../actions/movies";
 
-const LoadMoreButton = ({ currentPage, fetchMovies }) => {
+const LoadMoreButton = ({ currentPage, fetchMovies, searchTerm }) => {
   const handleClick = () => {
-    fetchMovies(currentPage);
+    fetchMovies(searchTerm, currentPage);
   };
   return (
     <Container className="d-flex justify-content-center">
@@ -27,10 +27,12 @@ const LoadMoreButton = ({ currentPage, fetchMovies }) => {
 LoadMoreButton.propTypes = {
   currentPage: PropTypes.number.isRequired,
   fetchMovies: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   currentPage: state.movies.currentPage,
+  searchTerm: state.search.searchTerm,
 });
 
 export default connect(mapStateToProps, { fetchMovies })(LoadMoreButton);

@@ -12,7 +12,7 @@ import Spinner from "./Spinner";
 // Redux Actions
 import { fetchMovies } from "./../../actions/movies";
 
-const Home = ({fetchMovies, fetchMoviesPending}) => {
+const Home = ({ fetchMovies, fetchMoviesPending }) => {
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
@@ -22,8 +22,8 @@ const Home = ({fetchMovies, fetchMoviesPending}) => {
       <PopularMovie />
       <SearchBar />
       <MoviesGrid />
+      {fetchMoviesPending && <Spinner />}
       <LoadMoreButton />
-      <Spinner />
     </>
   );
 };

@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 //Components
 import PopularMovie from "./../movies/PopularMovie";
@@ -7,7 +9,14 @@ import MoviesGrid from "./../movies/MoviesGrid";
 import LoadMoreButton from "./../movies/LoadMoreButton";
 import Spinner from "./Spinner";
 
-const Home = () => {
+// Redux Actions
+import { fetchMovies } from "./../../actions/movies";
+
+const Home = ({fetchMovies, fetchMoviesPending}) => {
+  useEffect(() => {
+    fetchMovies();
+  }, [fetchMovies]);
+
   return (
     <>
       <PopularMovie />
@@ -19,4 +28,13 @@ const Home = () => {
   );
 };
 
-export default Home;
+Home.propTypes = {
+  fetchMovies: PropTypes.func.isRequired,
+  fetchMoviesPending: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  fetchMoviesPending: state.movies.fetchMoviesPending,
+});
+
+export default connect(mapStateToProps, { fetchMovies })(Home);

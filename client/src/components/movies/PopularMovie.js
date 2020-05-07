@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
-import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Jumbotron, Button, Row, Col } from "reactstrap";
 
 import { IMAGE_BASE_URL } from "./../../utils/config";
 
@@ -14,7 +14,7 @@ import SearchBar from "./SearchBar";
 import "./PopularMovie.css";
 
 const PopularMovie = ({
-  popularMovie: { backdrop_path, original_title, overview },
+  popularMovie: { backdrop_path, original_title, overview, id },
 }) => {
   const popularBackground = IMAGE_BASE_URL + "w1280" + backdrop_path;
   const popularStyle = { backgroundImage: "url(" + popularBackground + ")" };
@@ -34,7 +34,9 @@ const PopularMovie = ({
             <p className="lead">{overview}</p>
             <hr className="my-2" />
             <p className="lead">
-              <Button color="primary">Learn More</Button>
+              <Link to={`/movies/${id}`}>
+                <Button color="primary">Learn More</Button>
+              </Link>
             </p>
           </div>
         </Col>

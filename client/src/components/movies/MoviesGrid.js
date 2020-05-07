@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Col, Row, CardImg, CardGroup, Container } from "reactstrap";
+import { Col, CardImg, CardGroup, Container } from "reactstrap";
 
 import { IMAGE_BASE_URL } from "./../../utils/config";
 

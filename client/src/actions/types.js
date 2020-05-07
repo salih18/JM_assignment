@@ -5,3 +5,7 @@ export const LOAD_MORE = "LOAD_MORE";
 export const LOAD_MORE_SUCCESS = "LOAD_MORE_SUCCESS";
 export const LOAD_MORE_ERROR = "LOAD_MORE_ERROR";
 export const SET_SEARCH = "SET_SEARCH";
+export const FETCH_MOVIE = "FETCH_MOVIE";
+export const FETCH_MOVIE_SUCCESS = "FETCH_MOVIE_SUCCESS";
+export const FETCH_MOVIE_ERROR = "FETCH_MOVIE_ERROR";
+

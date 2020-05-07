@@ -1,11 +1,39 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Col, Row, CardImg, CardGroup, Container } from "reactstrap";
 
-const MoviesGrid = () => {
-    return (
-        <div>
-            Grid Layout for movies
-        </div>
-    )
-}
+import { IMAGE_BASE_URL } from "./../../utils/config";
 
-export default MoviesGrid
+const MoviesGrid = ({ movies }) => {
+  return (
+    <Container>
+      <h1 className="text-center display-4 mb-5">Popular Movies</h1>
+      <CardGroup>
+        {movies.map((movie) => (
+          <Col md="3" key={movie.id} className="mb-4">
+            <Link to={`/movies/${movie.id}`}>
+              <CardImg
+                top
+                width="100%"
+                src={IMAGE_BASE_URL + "w500" + movie.poster_path}
+                alt={`${movie.title} image`}
+              />
+            </Link>
+          </Col>
+        ))}
+      </CardGroup>
+    </Container>
+  );
+};
+
+MoviesGrid.propTypes = {
+  movies: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  movies: state.movies.data,
+});
+
+export default connect(mapStateToProps, {})(MoviesGrid);
